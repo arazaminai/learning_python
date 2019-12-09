@@ -7,11 +7,11 @@ try:
     while True:  #main program loop
         print(" " * indent, end="")
         print("********")
-        time.sleep(0.05)
+        time.sleep(0.04)
 
         if indent_increasing:
             indent += 1
-            if indent == 30:
+            if indent == 80:
                 indent_increasing = False
         else:
             indent -= 1
