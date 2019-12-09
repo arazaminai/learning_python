@@ -1,2 +1,2 @@
 # learning_python
-This repo is made for no other reason other than as a cloud for random projects
+This repo is made for Random Projects being made while Learing
