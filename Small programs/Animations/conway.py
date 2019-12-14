@@ -39,27 +39,26 @@ while True:
 
             # Count number of numbering neighbors:
             num_neighbors = 0
-            if current_cells[left_coord][above_coord]:  # Top-left neighbor is alive
+            if current_cells[left_coord][above_coord] == "#":  # Top-left neighbor is alive
                 num_neighbors += 1
-            if current_cells[x][above_coord]:  # Top neighbor is alive
+            if current_cells[x][above_coord] == "#":  # Top neighbor is alive
                 num_neighbors += 1
-            if current_cells[right_coord][above_coord]:  # Top-right neighbor is alive
+            if current_cells[right_coord][above_coord] == "#":  # Top-right neighbor is alive
                 num_neighbors += 1
-            if current_cells[left_coord][y]:  # left neighbor is alive
+            if current_cells[left_coord][y] == "#":  # left neighbor is alive
                 num_neighbors += 1
             if current_cells[right_coord][y]:  # Right neighbor is alive
                 num_neighbors += 1
-            if current_cells[left_coord][below_coord]:  # Bottom-left neighbor is alive
+            if current_cells[left_coord][below_coord] == "#":  # Bottom-left neighbor is alive
                 num_neighbors += 1
-            if current_cells[x][below_coord]:  # Bottom neighbor is alive
+            if current_cells[x][below_coord] == "#":  # Bottom neighbor is alive
                 num_neighbors += 1
-            if current_cells[right_coord][below_coord]:  # Bottom-right neighbor is alive
+            if current_cells[right_coord][below_coord == "#"]:  # Bottom-right neighbor is alive
                 num_neighbors += 1
 
             # Set cell based on Conway's Game of Life rules:
-            if current_cells[x][y] == "#" and (
-                    num_neighbors == 2 or num_neighbors == 3):  # Living cells with 2 or 3 neighbors stay alive
-                next_cells[x][y] = "#"
+            if current_cells[x][y] == "#" and (num_neighbors == 2 or num_neighbors == 3):  # Living cells with 2 or 3 neighbors stay alive
+                print(next_cells[x][y])
             elif current_cells[x][y] == " " and num_neighbors == 3:  # Dead cells with 3 neighbors becomes alive
                 next_cells[x][y] = "#"
             else:  # Everything else dies or stays dead
