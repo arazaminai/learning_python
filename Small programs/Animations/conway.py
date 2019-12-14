@@ -15,16 +15,16 @@ for x in range(width):
             column.append('#')  # Add a living cell
         else:
             column.append(" ")  # Add a dead cell
-        next_cells.append(column)
+    next_cells.append(column)
 
 # Main program loop
 while True:
     print("\n" * 5)  # Separates each step with newlines
     current_cells = copy.deepcopy(next_cells)
     # Print current_cells on the screen
-    for y in range(height):
-        for x in range(width):
-            print(current_cells[x][y], end=" ")  # Print the # or space.
+    for x in range(width):
+        for y in range(height):
+            print(current_cells[x][y], end="")  # Print the # or space.
         print()
 
     # Calculate the next step's cells based on current step's  cells
