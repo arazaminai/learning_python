@@ -3,8 +3,8 @@ import copy
 import random
 import time
 
-width = 60
-height = 60
+width = 600
+height = 600
 
 # Create a list of lists for the cell
 next_cells = []
@@ -15,21 +15,21 @@ for x in range(width):
             column.append('#')  # Add a living cell
         else:
             column.append(" ")  # Add a dead cell
-    next_cells.append(column)
+        next_cells.append(column)
 
 # Main program loop
 while True:
     print("\n" * 5)  # Separates each step with newlines
     current_cells = copy.deepcopy(next_cells)
     # Print current_cells on the screen
-    for x in range(width):
-        for y in range(height):
-            print(current_cells[x][y], end="")  # Print the # or space.
+    for y in range(height):
+        for x in range(width):
+            print(current_cells[y][x], end="")  # Print the # or space.
         print()
 
     # Calculate the next step's cells based on current step's  cells
-    for x in range(width):
-        for y in range(height):
+    for y in range(height):
+        for x in range(width):
             # Get neighboring coordinates:
             # % width ensures left-coord is always between 0 and width - 1
             left_coord = (x - 1) % width
@@ -58,9 +58,9 @@ while True:
 
             # Set cell based on Conway's Game of Life rules:
             if current_cells[x][y] == "#" and (num_neighbors == 2 or num_neighbors == 3):  # Living cells with 2 or 3 neighbors stay alive
-                print(next_cells[x][y])
+                next_cells[x][y] = "#"
             elif current_cells[x][y] == " " and num_neighbors == 3:  # Dead cells with 3 neighbors becomes alive
                 next_cells[x][y] = "#"
             else:  # Everything else dies or stays dead
-                next_cells = " "
+                next_cells[x][y] = " "
     time.sleep(1)  # Adds 1 second pause to reduce flickering

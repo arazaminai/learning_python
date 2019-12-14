@@ -1,14 +1,30 @@
-grid = [[1, 2, 3, 4, 5, 6],
-        [7, 8, 9, 10, 11, 12],
-        [13, 14, 15, 16, 17, 18],
-        [19, 20, 21, 22, 23, 24],
-        [25, 26, 27, 28, 29, 30],
+grid = [['.', '.', '.', '.', '.', '.'],
+        ['.', 'O', 'O', '.', '.', '.'],
+        ['O', 'O', 'O', 'O', '.', '.'],
+        ['O', 'O', 'O', 'O', 'O', '.'],
+        ['.', 'O', 'O', 'O', 'O', 'O'],
         ['O', 'O', 'O', 'O', 'O', '.'],
         ['O', 'O', 'O', 'O', '.', '.'],
         ['.', 'O', 'O', '.', '.', '.'],
         ['.', '.', '.', '.', '.', '.']]
 
-for y in range(5):
-    for x in range(6):
+height = len(grid)
+width = len(grid[1])
+
+# Grid as is
+for y in range(height):
+    for x in range(width):
         print(grid[y][x], end="")
     print()
+
+print()
+
+# Grid tilted 90' right
+for x in range(width):
+    for y in range(height):
+        print(grid[y][x], end="")
+    print()
+
+
+
+
