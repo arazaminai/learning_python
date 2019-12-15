@@ -23,7 +23,6 @@ def multiplayer():
     turn = "X"
     while True:
         #break
-        print_board(the_board)
         print("Turn for " + turn + ". Move on which space?")
         #move = input()
         move = player()
@@ -32,28 +31,28 @@ def multiplayer():
             turn = "O"
         else:
             turn = "X"
+        print_board(the_board)
         if game(the_board):
-            print
             break
     
 def game(board):
-    if ("X" in (board[1] and board[2] and board[3])) or ("X" in (board[4] and board[5] and board[6])) or ("X" in (board[7] and board[8] and board[9])):
+    if "X" in board[1] and "X" in board[2] and "X" in board[3] or "X" in board[4] and "X" in board[5] and "X" in board[6] or "X" in board[7] and "X" in board[8] and "X" in board[9]:
+        print("X Wins!!!")
+        return True
+    if "X" in board[1] and "X" in board[4] and "X" in board[7] or "X" in board[2] and "X" in board[5] and "X" in board[8] or "X" in board[3] and "X" in board[6] and "X" in board[9]:
         print("X Wins!!!")
         return #score_x + 1
-    elif ("X" in (board[1] and board[4] and board[7])) or ("X" in (board[2] and board[5] and board[8])) or ("X" in (board[3] and board[6] and board[9])):
-        print("X Wins!!!")
-        return #score_x + 1
-    elif ("X" in (board[1] and board[5] and board[9])) or ("X" in (board[7] and board[5] and board[3])):
+    if "X" in board[3] and "X" in board[5] and "X" in board[7] or "X" in board[1] and "X" in board[5] and "X" in board[9]:
         print("X Wins!!!")
         return #score_x + 1
 
-    elif ("O" in (board[1] and board[2] and board[3])) or ("O" in (board[4] and board[5] and board[6])) or ("O" in (board[7] and board[8] and board[9])):
+    if "O" in board[1] and "O" in board[2] and "O" in board[3] or "O" in board[4] and "O" in board[5] and "O" in board[6] or "O" in board[7] and "O" in board[8] and "O" in board[9]:
         print("O Wins!!!")
         return #score_o + 1
-    elif ("O" in (board[1] and board[4] and board[7])) or ("O" in (board[2] and board[5] and board[8])) or ("O" in (board[3] and board[6] and board[9])):
+    if "O" in board[1] and "O" in board[4] and "O" in board[7] or "O" in board[2] and "O" in board[5] and "O" in board[8] or "O" in board[3] and "O" in board[6] and "O" in board[9]:
         print("O Wins!!!")
         return #score_o + 1
-    elif ("O" in (board[1] and board[5] and board[9])) or ("O" in (board[7] and board[5] and board[3])):
+    if "O" in board[3] and "O" in board[5] and "O" in board[7] or "O" in board[1] and "O" in board[5] and "O" in board[9]:
         print("O Wins!!!")
         return #score_o + 1
 
@@ -64,9 +63,9 @@ while True:
         7: "7", 8: "8", 9: "9"
         }
     score_x = 0
-    score_y = 0
-    multiplayer()
+    score_o = 0
     print_board(the_board)
+    multiplayer()
 
     while True:
         play = input("Play again?(y/n): ")
