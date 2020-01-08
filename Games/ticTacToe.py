@@ -1,4 +1,5 @@
-import sys, random
+import sys
+import random
 
 # The board grid
 def print_board(board):
@@ -8,53 +9,8 @@ def print_board(board):
     print("-+-+-")
     print(board[1] + "|" + board[2] + "|" + board[3])
 
-# Move validation
-def player(turn, played):
-    while True:
-        try:
-            move = input()
-            if move != "":  #(1) prevents empty stringto int error
-                move = int(move)
-                if move in the_board.keys(): #(2) checks if the move played isn't too high or low
-                    if move not in played: #(3) Prevents overide of values
-                        played.append(move)
-                        return move
-                    else: #(3)
-                        print_board(the_board)
-                        print("Error: Space already taken")
-                        print("Turn for " + turn + ". Move on which space?")
-                else: #(2)
-                    print("Error: Only between 1-9, as shown in the diagram")
-                    print("Turn for " + turn + ". Move on which space?")
-            else: #(1)
-                print_board(the_board)
-                print("Turn for " + turn + ". Move on which space?")
-        except ValueError:
-            print("Error: Only whole-numbers betweem 1-9, as shown in the diagram")
-            print("Turn for " + turn + ". Move on which space?")
-
-# 2 player game
-def multiplayer(played):
-    turn = "X"
-    for i in range(10):
-        if i == 9:
-            print("Donkey Game")
-            break
-        print("Turn for " + turn + ". Move on which space?")
-        move = player(turn, played)
-        the_board[move] = turn
-        
-        if turn == "X":
-            turn = "O"
-        else:
-            turn = "X"
-        
-        print_board(the_board)
-        if game(the_board):
-            break
-
 # Sets the winner
-def game(board):
+def win(board):
     if "X" in board[1] and "X" in board[2] and "X" in board[3] or "X" in board[4] and "X" in board[5] and "X" in board[6] or "X" in board[7] and "X" in board[8] and "X" in board[9]:
         print("X Wins!!!")
         return True
@@ -75,6 +31,69 @@ def game(board):
         print("O Wins!!!")
         return True
 
+def bot(played, turn):
+    while True:
+        bot = random.randint(1, 9)
+        if bot not in played:
+            played.append(bot)
+            break
+    return bot
+
+
+# Move validation
+def player(turn, played):
+    while True:
+        try:
+            move = input()
+            if move != "":  #(1) prevents empty string to int error
+                move = int(move)
+                if move in the_board.keys(): #(2) checks if the move played isn't too high or low
+                    if move not in played: #(3) Prevents overide of values
+                        played.append(move)
+                        return move
+                    else: #(3)
+                        print_board(the_board)
+                        print("Error: Space already taken")
+                        print("Turn for " + turn + ". Move on which space?")
+                else: #(2)
+                    print_board(the_board)
+                    print("Error: Only between 1-9, as shown in the diagram")
+                    print("Turn for " + turn + ". Move on which space?")
+            else: #(1)
+                print_board(the_board)
+                print("Turn for " + turn + ". Move on which space?")
+        except ValueError:
+            print_board(the_board)
+            print("Error: Only whole-numbers betweem 1-9, as shown in the diagram")
+            print("Turn for " + turn + ". Move on which space?")
+
+# 2 player game
+def multiplayer(played):
+    turn = "X"
+    
+    for i in range(10):
+        if i == 9:
+            print("Donkey Game")
+            break
+        print("Turn for " + turn + ". Move on which space?")
+        
+        if turn == "X":
+            move = player(turn, played)
+            the_board[move] = turn
+            turn = "O"
+        else:
+            move = bot(played, turn)
+            the_board[move] = turn
+            turn = "X"
+        
+        print_board(the_board)
+
+        if win(the_board):
+            break
+
+
+
+
 # The front end
 while True:
     try:
@@ -86,7 +105,6 @@ while True:
         turns_played = []
 
         print_board(the_board)
-        
         multiplayer(turns_played)
 
         while True:
@@ -94,10 +112,7 @@ while True:
             
             if play == "n":
                 sys.exit()
-            elif play == "y":
+            elif play == "y" or play == "":
                 break
     except KeyboardInterrupt:
         sys.exit()
-
-
-
