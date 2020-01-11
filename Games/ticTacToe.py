@@ -111,12 +111,37 @@ def player(turn, played):
             print("Turn " + turn)
 
 
-def single_player(played):
-    turn = "X"
-    print_board(the_board)
+def main_menu():
+    while True:
+        os.system("clear")
 
-    for turn_number in range(10):
         try:
+            board()
+            print("X and O:")
+            game_mode = input("1. Single Player \n2. Muliplayer \n")
+
+            while True:
+                os.system("clear")
+
+                if game_mode == "1":
+                    single_player(turns_played)
+                elif game_mode == "2":
+                    multiplayer(turns_played)
+                else:
+                    print("X and O:")
+                    game_mode = input("1. Single Player \n2. Muliplayer \nPress 1 for a singleplayer game and 2 for a multiplayer game \n")
+        except KeyboardInterrupt:
+            print()
+            os.system("clear")
+            sys.exit()
+
+
+def single_player(played):
+    try:
+        turn = "X"
+        print_board(the_board)
+
+        for turn_number in range(10):
             if turn_number == 9:
                 print_board(the_board)
                 print("donkey game")
@@ -137,17 +162,16 @@ def single_player(played):
             if win(the_board):
                 rounds(played)
                 single_player(played)
-        except KeyboardInterrupt:
-            print()
-            break
+    except KeyboardInterrupt:
+        main_menu()
 
 
 def multiplayer(played):
-    turn ="X"
-    print_board(the_board)
+    try:
+        turn ="X"
+        print_board(the_board)
 
-    for turn_number in range(10):
-        try:
+        for turn_number in range(10):
             if turn_number == 9:
                 print_board(the_board)
                 print("Donkey Game")
@@ -168,32 +192,12 @@ def multiplayer(played):
             if win(the_board):
                 rounds(played)
                 multiplayer(played)
-        except KeyboardInterrupt:
-            print()
-            break
-
-
-
-os.system("clear")
-
-#Main Menu
-while True:
-    try:
-        board()
-        print("X and O:")
-        game_mode = input("1. Single Player \n2. Muliplayer \n")
-
-        while True:
-            os.system("clear")
-
-            if game_mode == "1":
-                single_player(turns_played)
-            elif game_mode == "2":
-                multiplayer(turns_played)
-            else:
-                print("X and O:")
-                game_mode = input("1. Single Player \n2. Muliplayer \nPress 1 for a singleplayer game and 2 for a multiplayer game \n")
     except KeyboardInterrupt:
-        print()
-        os.system("clear")
-        sys.exit()
+        main_menu()
+
+
+
+
+
+main_menu()
+
