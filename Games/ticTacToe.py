@@ -21,6 +21,7 @@ def board():
 
 # The board grid
 def print_board(board):
+    os.system("clear")
     print(board[7] + "|" + board[8] + "|" + board[9])
     print("-+-+-")
     print(board[4] + "|" + board[5] + "|" + board[6])
@@ -28,7 +29,7 @@ def print_board(board):
     print(board[1] + "|" + board[2] + "|" + board[3])
 
 
-def rounds():
+def rounds(played):
         while True:
             play = input("Play again?(y/n): ")
             
@@ -36,41 +37,36 @@ def rounds():
                 os.system("clear")
                 sys.exit()
             elif play == "y" or play == "":
+                os.system("clear")
                 board()
-                turns_played.clear()
+                played.clear()
                 break
 
 
 # Sets the winner
 def win(board):
     if "X" in board[1] and "X" in board[2] and "X" in board[3] or "X" in board[4] and "X" in board[5] and "X" in board[6] or "X" in board[7] and "X" in board[8] and "X" in board[9]:
-        os.system("clear")
         print_board(the_board)
         print("X Wins!!!")
         return True
     elif "X" in board[1] and "X" in board[4] and "X" in board[7] or "X" in board[2] and "X" in board[5] and "X" in board[8] or "X" in board[3] and "X" in board[6] and "X" in board[9]:
-        os.system("clear")
         print_board(the_board)
         print("X Wins!!!")
         return True
     elif "X" in board[3] and "X" in board[5] and "X" in board[7] or "X" in board[1] and "X" in board[5] and "X" in board[9]:
-        os.system("clear")
         print_board(the_board)
         print("X Wins!!!")
         return True
 
     elif "O" in board[1] and "O" in board[2] and "O" in board[3] or "O" in board[4] and "O" in board[5] and "O" in board[6] or "O" in board[7] and "O" in board[8] and "O" in board[9]:
-        os.system("clear")
         print_board(the_board)
         print("O Wins!!!")
         return True
     elif "O" in board[1] and "O" in board[4] and "O" in board[7] or "O" in board[2] and "O" in board[5] and "O" in board[8] or "O" in board[3] and "O" in board[6] and "O" in board[9]:
-        os.system("clear")
         print_board(the_board)
         print("O Wins!!!")
         return True
     elif "O" in board[3] and "O" in board[5] and "O" in board[7] or "O" in board[1] and "O" in board[5] and "O" in board[9]:
-        os.system("clear")
         print_board(the_board)
         print("O Wins!!!")
         return True
@@ -100,17 +96,14 @@ def player(turn, played):
                         played.append(move)
                         return move
                     else: #(3)
-                        os.system("clear")
                         print_board(the_board)
                         print("Error: Space already taken")
                         print("Turn " + turn)
                 else: #(2)
-                    os.system("clear")
                     print_board(the_board)
                     print("Error: Only between 1-9, as shown in the diagram")
                     print("Turn " + turn)
             else: #(1)
-                os.system("clear")
                 print_board(the_board)
                 print("Turn " + turn)
         except ValueError:
@@ -125,9 +118,11 @@ def single_player(played):
     for turn_number in range(10):
         try:
             if turn_number == 9:
+                print_board(the_board)
                 print("donkey game")
-                break
-            
+                rounds(played)
+                single_player(played)
+
             if turn == "X":
                 print("Turn " + turn)
                 move = player(turn, played)
@@ -137,11 +132,10 @@ def single_player(played):
                 move = bot(turn, played)
                 the_board[move] = turn
                 turn = "X"
-                os.system("clear")
                 print_board(the_board)
 
             if win(the_board):
-                rounds()
+                rounds(played)
                 single_player(played)
         except KeyboardInterrupt:
             print()
@@ -153,11 +147,13 @@ def multiplayer(played):
     turn ="X"
     print_board(the_board)
 
-    for i in range(10):
+    for turn_number in range(10):
         try:
-            if i == 9:
+            if turn_number == 9:
+                print_board(the_board)
                 print("Donkey Game")
-                break
+                rounds(played)
+                multiplayer(played)
 
             print("Turn " + turn)
             move = player(turn, played)
@@ -168,11 +164,10 @@ def multiplayer(played):
             else:
                 turn = "X"
             
-            os.system("clear")
             print_board(the_board)
 
             if win(the_board):
-                rounds()
+                rounds(played)
                 multiplayer(played)
         except KeyboardInterrupt:
             print()
@@ -202,7 +197,6 @@ while True:
             else:
                 print("X and O:")
                 game_mode = input("1. Single Player \n2. Muliplayer \nPress 1 for a singleplayer game and 2 for a multiplayer game \n")
-                print()
     except KeyboardInterrupt:
         print()
         os.system("clear")
