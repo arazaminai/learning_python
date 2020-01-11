@@ -142,7 +142,6 @@ def single_player(played):
             break
 
 
-# 2 player game
 def multiplayer(played):
     turn ="X"
     print_board(the_board)
@@ -175,11 +174,10 @@ def multiplayer(played):
 
 
 
+os.system("clear")
 
-# The front end
+#Main Menu
 while True:
-    os.system("clear")
-    
     try:
         board()
         print("X and O:")
@@ -190,10 +188,8 @@ while True:
 
             if game_mode == "1":
                 single_player(turns_played)
-                break
             elif game_mode == "2":
                 multiplayer(turns_played)
-                break
             else:
                 print("X and O:")
                 game_mode = input("1. Single Player \n2. Muliplayer \nPress 1 for a singleplayer game and 2 for a multiplayer game \n")
