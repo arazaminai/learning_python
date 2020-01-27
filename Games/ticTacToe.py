@@ -1,4 +1,6 @@
+#! python3
 #ticTacToe
+
 import sys
 import random
 import os
@@ -131,7 +133,6 @@ def main_menu():
                     print("X and O:")
                     game_mode = input("1. Single Player \n2. Muliplayer \nPress 1 for a singleplayer game and 2 for a multiplayer game \n")
         except KeyboardInterrupt:
-            print()
             os.system("clear")
             sys.exit()
 
