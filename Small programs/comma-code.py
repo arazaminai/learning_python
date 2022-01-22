@@ -10,6 +10,7 @@ def comma_code():
         lists.append(list_items)
 
     list_print = str(lists[0:-1]).replace("[", "").replace("]", "").replace("'", "")
-    print(list_print + " and " + lists[-1])
+    #print(list_print + " and " + lists[-1])
+    print("%s and %s" % (list_print, lists[-1]))
 
 comma_code()
